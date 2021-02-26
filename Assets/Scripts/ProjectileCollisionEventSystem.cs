@@ -5,6 +5,7 @@ using Unity.Jobs;
 using Unity.Collections;
 using Unity.Physics;
 using Unity.Physics.Systems;
+using Unity.Burst;
 
 [UpdateAfter(typeof(EndFramePhysicsSystem))]
 public class ProjectileCollisionEventSystem : JobComponentSystem
@@ -14,11 +15,13 @@ public class ProjectileCollisionEventSystem : JobComponentSystem
 
     protected override void OnCreate()
     {
+        base.OnCreate();
         m_BuildPhysicsWorldSystem = World.GetOrCreateSystem<BuildPhysicsWorld>();
         m_StepPhysicsWorldSystem = World.GetOrCreateSystem<StepPhysicsWorld>();
     }
 
-    struct CollisionEventImpulseJob : ICollisionEventsJobBase
+    [BurstCompile(CompileSynchronously = true)]
+    struct CollisionEventImpulseJob : ICollisionEventsJob
     {
         [ReadOnly] public ComponentDataFromEntity<ProjectileData> projectileGroup;
         public ComponentDataFromEntity<EnemyData> enemyGroup;
@@ -50,6 +53,7 @@ public class ProjectileCollisionEventSystem : JobComponentSystem
         }
     }
 
+    [BurstCompile(CompileSynchronously = true)]
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         JobHandle jobHandle = new CollisionEventImpulseJob

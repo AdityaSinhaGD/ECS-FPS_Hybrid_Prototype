@@ -6,11 +6,12 @@ public class MovementController : MonoBehaviour
 {
     private Camera playerCam;
     private float pitch, yaw;
-    private float speed = 50f;
+    private float speed = 25f;
     // Start is called before the first frame update
     void Start()
     {
         playerCam = Camera.main;
+  
     }
 
     // Update is called once per frame
@@ -24,9 +25,9 @@ public class MovementController : MonoBehaviour
     {
         float xDir = Input.GetAxisRaw("Horizontal");
         float zDir = Input.GetAxisRaw("Vertical");
-        Vector3 direction = transform.right * xDir + transform.forward * zDir;
-        Vector3 velocity = speed * direction;
-        transform.Translate(velocity * Time.deltaTime);
+        Vector3 direction = this.transform.right * xDir + playerCam.transform.forward * zDir;
+        Vector3 velocity = speed * direction * Time.deltaTime;
+        transform.position += velocity;  
     }
 
     private void ProcessLook()
@@ -35,9 +36,10 @@ public class MovementController : MonoBehaviour
         float lookY = Input.GetAxisRaw("Mouse Y") * 1f;
 
         pitch -= lookY;
-        yaw += lookX;
+
+        transform.Rotate(new Vector3(0f, lookX, 0f), Space.Self);
         pitch = Mathf.Clamp(pitch, -80f, 80f);
 
-        transform.eulerAngles = new Vector3(pitch, yaw, 0f);
+        playerCam.transform.localEulerAngles = Vector3.right * pitch;
     }
 }

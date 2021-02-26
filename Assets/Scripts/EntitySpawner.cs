@@ -12,9 +12,9 @@ public class EntitySpawner : MonoBehaviour
     public GameObject projectilePrefab;
     public GameObject spawnedAfterEnemyDeathPrefab;
 
-    int numberOfEnemyPrefabs = 5000;
-    int numberOfNeutralPrefabs = 5000;
-    int numberOfProjectilesPerFire = 15;
+    public int numberOfEnemyPrefabs = 10000;
+    public int numberOfNeutralPrefabs = 10000;
+    public int numberOfProjectilesPerFire = 10;
 
     private Transform projectileSpawnTransform;
 
@@ -27,6 +27,7 @@ public class EntitySpawner : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         projectileSpawnTransform = Camera.main.transform;
     }
 
@@ -48,7 +49,7 @@ public class EntitySpawner : MonoBehaviour
             var instance = entityManager.Instantiate(enemyEntity);
 
             float x = UnityEngine.Random.Range(-500, 500);
-            float y = UnityEngine.Random.Range(-100, 100);
+            float y = UnityEngine.Random.Range(-500, 500);
             float z = UnityEngine.Random.Range(-500, 500);
 
             float3 position = new float3(x, y, z);
@@ -69,7 +70,7 @@ public class EntitySpawner : MonoBehaviour
             var instance = entityManager.Instantiate(neutralEntity);
 
             float x = UnityEngine.Random.Range(-500, 500);
-            float y = UnityEngine.Random.Range(-100, 100);
+            float y = UnityEngine.Random.Range(-500, 500);
             float z = UnityEngine.Random.Range(-500, 500);
 
             float3 position = new float3(x, y, z);
@@ -108,6 +109,11 @@ public class EntitySpawner : MonoBehaviour
                     Value = projectileSpawnTransform.rotation
                 });
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
         
     }
