@@ -262,6 +262,8 @@ MonoBehaviour:
     type: 3}
   projectilePrefab: {fileID: 4611383688886090540, guid: 4e4dc4f3db7b4b2478808a6c88e99638,
     type: 3}
+  spawnedAfterEnemyDeathPrefab: {fileID: 3719443813478891366, guid: 6d43c7f42efff5344b2e9e03f5319848,
+    type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

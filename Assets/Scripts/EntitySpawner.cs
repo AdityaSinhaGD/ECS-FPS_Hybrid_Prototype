@@ -10,6 +10,7 @@ public class EntitySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject neutralPrefab;
     public GameObject projectilePrefab;
+    public GameObject spawnedAfterEnemyDeathPrefab;
 
     int numberOfEnemyPrefabs = 5000;
     int numberOfNeutralPrefabs = 5000;
@@ -22,6 +23,7 @@ public class EntitySpawner : MonoBehaviour
     World world;
 
     Entity projectileEntity;
+    public static Entity spawnedAfterEnemyDeathEntity;
 
     private void Awake()
     {
@@ -39,6 +41,7 @@ public class EntitySpawner : MonoBehaviour
         Entity enemyEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(enemyPrefab, settings);
         Entity neutralEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(neutralPrefab, settings);
         projectileEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(projectilePrefab, settings);
+        spawnedAfterEnemyDeathEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(spawnedAfterEnemyDeathPrefab, settings);
 
         for (int i = 0; i < numberOfEnemyPrefabs; i++)
         {
