@@ -23,7 +23,8 @@ public class ProjectileCollisionEventSystem : JobComponentSystem
     [BurstCompile(CompileSynchronously = true)]
     struct CollisionEventImpulseJob : ICollisionEventsJob
     {
-        [ReadOnly] public ComponentDataFromEntity<ProjectileData> projectileGroup;
+        //[ReadOnly] public ComponentDataFromEntity<ProjectileData> projectileGroup;
+        [ReadOnly] public ComponentDataFromEntity<LifetimeData> projectileGroup;
         public ComponentDataFromEntity<EnemyData> enemyGroup;
 
         public void Execute(CollisionEvent collisionEvent)
@@ -58,7 +59,7 @@ public class ProjectileCollisionEventSystem : JobComponentSystem
     {
         JobHandle jobHandle = new CollisionEventImpulseJob
         {
-            projectileGroup = GetComponentDataFromEntity<ProjectileData>(),
+            projectileGroup = GetComponentDataFromEntity<LifetimeData>(),
             enemyGroup = GetComponentDataFromEntity<EnemyData>()
         }.Schedule(m_StepPhysicsWorldSystem.Simulation, ref m_BuildPhysicsWorldSystem.PhysicsWorld, inputDeps);
 

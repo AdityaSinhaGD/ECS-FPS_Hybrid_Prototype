@@ -42,7 +42,7 @@ public class LifetimeSystem : JobComponentSystem
 
                     EntitySpawner.entityManager.SetComponentData(spawn, new PhysicsVelocity
                     {
-                        Linear = randomDirection * 2
+                        Linear = randomDirection * 3
                     });
                 }
 
