@@ -9,6 +9,7 @@ using Unity.Burst;
 [BurstCompile(CompileSynchronously = true)]
 public class ProjectileMotionSystem : JobComponentSystem
 {
+    
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         float deltaTime = Time.DeltaTime;

@@ -4,6 +4,7 @@ using Unity.Transforms;
 using Unity.Jobs;
 using Unity.Collections;
 using Unity.Physics;
+using Unity.Burst;
 
 public class LifetimeSystem : JobComponentSystem
 {

@@ -7,7 +7,6 @@ using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Burst;
 
-[BurstCompile(CompileSynchronously = true)]
 [UpdateAfter(typeof(EndFramePhysicsSystem))]
 public class ProjectileCollisionEventSystem : JobComponentSystem
 {
@@ -54,6 +53,7 @@ public class ProjectileCollisionEventSystem : JobComponentSystem
         }
     }
 
+    [BurstCompile(CompileSynchronously = true)]
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         JobHandle jobHandle = new CollisionEventImpulseJob
